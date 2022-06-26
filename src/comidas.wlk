@@ -1,9 +1,31 @@
+/*
+ 1) La mejor opción para manejar el peso en las comidas era la siguiente:
+. método abstracto peso en Plato
+. const property peso en Provoleta
+. en esAbundante() usar self.peso()
+
+2) valoración() debía ser un método abstracto, (no era un atributo)
+* 
+3) esAptoVegetariano() debía ser un métod abstracto, (no era un atributo)
+* 
+4) Incorrecto uso de los booleando en  esAptoVegetariano de Provoleta
+* 
+6) Los panes debía ser objetos con nombre propio en lugar de clases 
+* y además no tendría sentido armar clases que no hacen nada y además debia ser un valor fijo no configurable
+* 
+7) La hamburguesa Vegerariana herada de Hamburguesa de Carne
+* 
+8) Corte no debía heredar de parrillada
+ */
+
 class Plato {
-	var property peso = 0
-	var property esAptoVegetariano = false
-	var property valoracion = 0
 	
-	method esAbundante(){ return peso > 250}
+	method peso()
+	method esAptoVegetariano()
+	method valoracion()
+	
+	
+	method esAbundante(){ return self.peso() > 250}
 	
 	
 }
@@ -12,11 +34,11 @@ class Plato {
 
 class Provoleta inherits Plato{
 	var property tieneEspecias
-	
+	const property peso	
 	override method esAptoVegetariano(){
-		if (not tieneEspecias) {return false}
-		else{return true}
+		return not tieneEspecias 
 	}
+	
 	
 	method esEspecial(){ return self.esAbundante() or tieneEspecias}
 	
@@ -41,28 +63,26 @@ class HamburguesaDeCarne inherits Plato{
 
 
 
-class Pan{
-	var property valoracion=0
+
+object industrial {
+	method valoracion() = 0
+}
+
+object casero  {
+	method valoracion() = 20
 	
 }
 
-class Industrial inherits Pan{
-	
-}
-
-class Casero  inherits Pan{
-	
-}
-
-class MasaMadre inherits Pan{
-	
+object masaMadre {
+	method valoracion()= 45
 }
 
 
-class HamburguesaVegetariana inherits Plato{
+class HamburguesaVegetariana inherits HamburguesaDeCarne{
 	
-	const pan 
+	
 	var property legumbre 
+	
 	
 	override method esAptoVegetariano(){return true}
 	
@@ -79,7 +99,9 @@ class Parrillada inherits Plato{
 	
 	method agregarCorte(unCorte) = cortes.add(unCorte)
 	
-	override method peso(){return cortes.sum({c=> c.peso()})}
+	override method esAptoVegetariano(){return false}
+	
+	override method peso(){return cortes.sum( {c=> c.peso() })}
 	
 	override method valoracion(){
 		return (0.max(15 * cortes.max({c => c.calidad()}).calidad()) - cortes.size())
@@ -89,9 +111,10 @@ class Parrillada inherits Plato{
 }
 
 
-class Cortes inherits Parrillada{
+class Cortes {
 	var property nombre 
-	var property calidad = 0
+	var property calidad 
+	var property peso =0
 }
 
 

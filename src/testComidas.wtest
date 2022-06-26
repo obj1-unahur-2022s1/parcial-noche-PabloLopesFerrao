@@ -1,17 +1,17 @@
+/*Correcciones en los test que se ajustan a los cambio de c */
 import comidas.*
 describe "Test de Comidas" {
 	
-	var panC = new Casero(valoracion=20)
-	var hamburCarne = new HamburguesaDeCarne(pan=panC)
 	
-	var panM = new MasaMadre(valoracion=45)
-	var hamburVeggie = new HamburguesaVegetariana(pan=panM,legumbre="garbanzos")
-	var provo = new Provoleta(peso=190, tieneEspecias=true)
-	var asado = new Cortes(nombre="asado", calidad=10,peso=250)
-	var entrania = new Cortes(nombre="entrania", calidad=7,peso=200)
-	var chorizo = new Cortes(nombre="chorizo", calidad=8,peso=50)
+	const hamburCarne = new HamburguesaDeCarne(pan=casero)
+	const hamburVeggie = new HamburguesaVegetariana(pan=masaMadre,legumbre="garbanzos")
+	
+	const provo = new Provoleta(peso=190, tieneEspecias=true)
+	const asado = new Cortes(nombre="asado", calidad=10,peso=250)
+	const entrania = new Cortes(nombre="entrania", calidad=7,peso=200)
+	const chorizo = new Cortes(nombre="chorizo", calidad=8,peso=50)
 		
-	var parrillad = new Parrillada()
+	const parrillad = new Parrillada()
 	
 	
 	method initialize() {
